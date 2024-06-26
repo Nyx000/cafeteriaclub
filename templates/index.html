@@ -3,10 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cafeteriaClub</title>
+    <title>Cafeteria Club</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <h1>Bouldering Room</h1>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/6GXmXdliMMY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div id="app">
+        <h1>{{ title }}</h1>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                title: 'Cafeteria Club Menu',
+                menu: []
+            },
+            mounted() {
+                this.fetchMenu();
+            },
+            methods: {
+                fetchMenu() {
+                    axios.get('/api/menu')
+                        .then(response => {
+                            this.menu = response.data;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching menu:', error);
+                        });
+                }
+            }
+        });
+    </script>
 </body>
 </html>
