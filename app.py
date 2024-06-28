@@ -26,6 +26,7 @@ def get_menu():
 if __name__ == '__main__':
     # Configure logging
     logging.basicConfig(level=logging.INFO)
+    app.run(debug=False)
     
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
